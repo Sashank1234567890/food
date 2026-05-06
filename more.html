@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>More Options</title>
+    <link rel="stylesheet" href="more.css">
+</head>
+
+<body>
+
+<!-- 🎥 Background Video -->
+<video autoplay muted loop id="bgVideo" playsinline>
+    <source src="more.mp4" type="video/mp4">
+</video>
+
+<!-- 🎵 Music -->
+<audio id="bgMusic" loop>
+    <source src="chill.mp3" type="audio/mp3">
+</audio>
+
+<!-- 🔊 Click -->
+<audio id="clickSound" src="click.mp3"></audio>
+
+<div class="container">
+
+    <div class="content">
+
+        <!-- ✅ CHECKBOXES WITH VALUES -->
+        <div class="options">
+            <label><input type="checkbox" value="weight_loss"> Weight Loss ⚖️</label>
+            <label><input type="checkbox" value="high_protein"> High Protein 💪</label>
+            <label><input type="checkbox" value="low_fat"> Low Fat 🥗</label>
+            <label><input type="checkbox" value="diabetes"> Diabetes Friendly 🍏</label>
+        </div>
+
+        <!-- ✅ BUTTON -->
+        <button onclick="getRecipes()">Get my recipes 🍲</button>
+
+    </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    document.querySelectorAll("input, button").forEach(el => {
+        el.addEventListener("click", () => {
+            document.getElementById("clickSound").play();
+        });
+    });
+
+    window.getRecipes = function () {
+
+        console.log("🔥 BUTTON CLICKED");
+
+        let ingredients = JSON.parse(localStorage.getItem("ingredients")) || [];
+        let foodType = localStorage.getItem("foodType") || "";
+        let flavor = localStorage.getItem("flavor") || "";
+        console.log("Ingredients:", ingredients);
+        console.log("Food type:", foodType);
+        console.log("Flavor:", flavor);
+
+        let diet = [];
+
+        document.querySelectorAll("input[type='checkbox']:checked").forEach(cb => {
+            diet.push(cb.value);
+        });
+
+        console.log("Diet filters:", diet);
+
+        fetch("http://127.0.0.1:5000/get_recipes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                ingredients: ingredients,
+                diet: diet,
+                type: foodType,
+                flavor: flavor
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log("🔥 Recipes from backend:", data);
+
+            localStorage.setItem("recipes", JSON.stringify(data.recipes || data));
+            if (data.message) {
+                localStorage.setItem("recipesMessage", data.message);
+            } else {
+                localStorage.removeItem("recipesMessage");
+            }
+            window.location.href = "result.html";
+        })
+        .catch(err => {
+            console.error("❌ Error:", err);
+        });
+    };
+
+});
+</script>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ingredients 💛</title>
+    <link rel="stylesheet" href="ingredients.css">
+</head>
+
+<body>
+
+
+<video autoplay muted loop id="bgVideo" playsinline>
+    <source src="options.mp4" type="video/mp4">
+</video>
+
+
+<audio id="bgMusic" loop>
+    <source src="chill.mp3" type="audio/mp3">
+</audio>
+
+<!-- 🔊 Click Sound -->
+<audio id="clickSound" src="click.mp3"></audio>
+
+<!-- 💛 Content -->
+<div class="overlay">
+
+    <h1>🥗 Choose Your Preferences</h1>
+
+    <!-- Row -->
+    <div class="row">
+        <div class="field">
+            <label>Type of Food</label>
+            <select>
+                <option>Veg 🌱</option>
+                <option>Non-Veg 🍗</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>Flavour</label>
+            <select>
+                <option>Sweet 🍰</option>
+                <option>Spicy 🌶️</option>
+                <option>Sour 🍋</option>
+                <option>bitter ☕</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Ingredients -->
+    <div class="field full">
+        <label>Ingredients</label>
+        <div id="ingredientsList">
+            <input type="text" placeholder="Enter ingredient 🍓">
+        </div>
+    </div>
+    <audio id="bgMusic" autoplay loop>
+        <source src="chill.mp3" type="audio/mp3">
+    </audio>
+    <!-- Buttons -->
+    <div class="btn-group">
+        <button onclick="addIngredient()">➕ Add More</button>
+        <button onclick="goToMore()">Next ➡️</button>
+    </div>
+
+</div>
+<script src="ingredients.js"></script>
+
+</body>
+</html>

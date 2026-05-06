@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome 💛</title>
+    <link rel="stylesheet" href="indexstyle.css">
+</head>
+
+<body>
+<video autoplay muted loop id="bgVideo">
+        <source src="index.mp4" type="video/mp4">
+</video>
+<audio id="bgMusic" autoplay loop>
+        <source src="chill.mp3" type="audio/mp3">
+    </audio>
+<audio id="clickSound" src="click.mp3"></audio>
+
+<div class="overlay">
+    <h1>💛 Welcome Friend</h1>
+    <p>Let's cook something amazing today ✨</p>
+
+    <input type="text" id="userId" placeholder="Enter your User ID 💕">
+    <input type="password" id="password" placeholder="Enter your Password 🔒">
+    
+    <div style="display: flex; gap: 10px;">
+        <button onclick="signIn()" style="flex: 1;">Sign In 😋</button>
+        <button onclick="toggleSignUp()" style="flex: 1;">Sign Up ✨</button>
+    </div>
+    
+</div>
+
+<script>
+function toggleSignUp() {
+    const btn = event.target;
+    if (btn.textContent.includes("Sign Up")) {
+        btn.textContent = "Sign In 😋";
+        document.querySelector("button:nth-of-type(1)").textContent = "Create Account 🎉";
+    } else {
+        btn.textContent = "Sign Up ✨";
+        document.querySelector("button:nth-of-type(1)").textContent = "Sign In 😋";
+    }
+}
+
+function signIn() {
+    const userId = document.getElementById("userId").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const isSignUp = event.target.textContent.includes("Create Account");
+
+    if (!userId || !password) {
+        alert("Please enter both User ID and Password!");
+        return;
+    }
+
+    const endpoint = isSignUp ? "/register" : "/login";
+
+    fetch("http://127.0.0.1:5000" + endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: userId, password: password })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            localStorage.setItem("user_id", userId);
+            window.location.href = "ingredients.html";
+        } else {
+            alert(data.message || (isSignUp ? "Sign up failed!" : "Invalid credentials!"));
+        }
+    })
+    .catch(err => {
+        console.error("Error:", err);
+        alert(isSignUp ? "Sign up failed!" : "Login failed!");
+    });
+}
+</script>
+
+</body>
+</html> 

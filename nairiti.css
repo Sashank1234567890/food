@@ -1,0 +1,53 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Screen scroll na ho */
+    font-family: 'Arial', sans-serif;
+}
+
+
+#bgVideo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Video stretch nahi hogi, screen fill karegi */
+    z-index: -1;        /* Video ko background mein bhejne ke liye */
+}
+
+/* 4. Content Container (Optional but good for layout) */
+.content {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+/* 5. "Let's Go" Button Styling */
+button {
+    position: absolute;
+    left: 80%;       /* Left se 80% door */
+    top: 20%;        /* Top se 20% door */
+    
+    /* Isse button apne center point se position hota hai */
+    transform: translate(-50%, -50%);
+
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 10;     /* Video ke upar dikhne ke liye */
+}
+
+/* 6. Hover Effect */
+button:hover {
+    background-color: #f0f0f0;
+    transform: translate(-50%, -50%) scale(1.1); /* Thoda bada dikhega hover par */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}

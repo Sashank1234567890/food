@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe Result 🍲</title>
+    <link rel="stylesheet" href="result.css">
+</head>
+
+<body>
+
+<!-- 🎥 Background Video -->
+<video autoplay muted loop id="bgVideo"
+       playsinline
+       disablepictureinpicture>
+    <source src="Black and White Elegant Food Vlog Video.mp4" type="video/mp4">
+</video>
+
+<!-- 🔊 Sound -->
+<audio id="clickSound" src="click.mp3"></audio>
+<audio id="bgMusic" autoplay loop>
+        <source src="chill.mp3" type="audio/mp3">
+    </audio>
+<!-- 💛 Result Content -->
+<div class="overlay">
+
+    <h1>🍲 Your Recipe</h1>
+
+    <!-- Wishlist Section -->
+    <div id="wishlist"></div>
+
+    <div id="recipeText"></div>
+
+    <h2>🥗 Diet Category</h2>
+    <p id="dietResult"></p>
+
+    <!-- Bhook aur lagi hai button -->
+    <button class="bhook-btn" onclick="window.location.href='front.html'">Bhook aur lagi hai? 😋</button>
+
+</div>
+
+<script src="result.js"></script>
+
+</body>
+</html>
