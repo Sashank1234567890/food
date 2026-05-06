@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="stylefront.css">
+</head>
+<body>
+
+    <video autoplay muted loop id="bgVideo">
+        <source src="zesty.mp4" type="video/mp4">
+    </video>
+
+
+    <div class="content">
+        <button onclick="goToNext()">Let's go</button>
+    </div>
+    <audio id="clickSound" src="click.mp3"></audio>
+    
+    <script>
+        function goToNext() {
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+</html>
